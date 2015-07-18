@@ -46,6 +46,10 @@ public class Pointf {
 		return result;
 	}
 	
+	static public Pointf midBetween(Pointf x,Pointf y){
+		return new Pointf((x.getX()+y.getX())/2,(x.getY()+y.getY())/2);
+	}
+	
 	@Override
 	public String toString() {
 		String str = "("+x+","+y+")";

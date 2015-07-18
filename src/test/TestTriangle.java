@@ -21,6 +21,7 @@ public class TestTriangle extends TestCase {
             assertEquals("error Triangle->getMid",2.5f,t.getMid().getY()); 
     	}
     }
+	
 	public void testDraw(){
 		System.out.println("Draw a circle");
 	}
