@@ -18,7 +18,7 @@ public class TestTriangle extends TestCase {
     	for(int i = 0;i<10;i++){
     		Triangle t = new Triangle(new Pointf(1,1),new Pointf(1, 4),new Pointf(5, 4));
             assertEquals("error Triangle->getMid",3f,t.getMid().getX());
-            assertEquals("error Triangle->getMid",2.5f,t.getMid().getY());
+            assertEquals("error Triangle->getMid",2.5f,t.getMid().getY()); 
     	}
     }
 	public void testDraw(){
