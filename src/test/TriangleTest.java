@@ -10,15 +10,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-public class Graphy extends JFrame {
-	public Graphy() {
+public class TriangleTest extends JFrame {
+	public TriangleTest() {
 		setTitle("Graphy Test");
 		getContentPane().add(new ArcsPanel());
 	}
 
 	/** 主方法 */
 	public static void main(String[] args) {
-		Graphy frame = new Graphy();
+		TriangleTest frame = new TriangleTest();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(640, 480);
 		frame.setLocationRelativeTo(null);
@@ -26,7 +26,6 @@ public class Graphy extends JFrame {
 	}
 }
 
-// 在面板上画弧形的类
 class ArcsPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
