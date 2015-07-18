@@ -45,4 +45,11 @@ public class Pointf {
 				* (a.y - b.y));
 		return result;
 	}
+	
+	@Override
+	public String toString() {
+		String str = "("+x+","+y+")";
+		return str;
+	}
+	
 }

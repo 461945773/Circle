@@ -3,64 +3,115 @@ package mid;
 import java.util.ArrayList;
 
 public class Graph {
-	@SuppressWarnings("unused")
-	private Pointf[] points;
-	private ArrayList<Pointf>  usedPoints;
-	private ArrayList<Pointf> nousePoints;
-	Graph(Pointf[] points) {
-		this.points = points;
-		usedPoints = null;
-		for(int i = 0; i < points.length;i++ ){
-			nousePoints.add(points[i]);
+	private Pointf[] pointfs;
+	private ArrayList<Pointf> usedpointfs;
+	private ArrayList<Pointf> nousepointfs;
+	private ArrayList<Triangle> sorting;
+
+	public Graph(Pointf[] pointfs) {
+		this.pointfs = new Pointf[pointfs.length];
+		this.pointfs = pointfs;
+		nousepointfs = new ArrayList<Pointf>();
+		usedpointfs = new ArrayList<Pointf>();
+		sorting = new ArrayList<Triangle>();
+		for (int i = 0; i < pointfs.length; i++) {
+			nousepointfs.add(pointfs[i]);
 		}
 	}
 
 	public void getMid() {
-		
+
 	}
 
-	boolean _getMid(Pointf[] points,Circle c) {
-		if (points.length == 3) {
-			Triangle t = new Triangle(points[0], points[1], points[2]);
+	public ArrayList<Pointf> getNousepointfs() {
+		return nousepointfs;
+	}
+
+	public Pointf[] getPointfs() {
+		return pointfs;
+	}
+
+	public boolean _getMid(Pointf[] pointfs, Circle c) {
+		if (pointfs.length == 3) {
+			Triangle t = new Triangle(pointfs[0], pointfs[1], pointfs[2]);
 			if (!t.isTri()) {
 				return false;
 			}
-			c.mid = t.getMid();
-			c.R = t.getR();
-			usedPoints.clear();
-			for(int i = 0; i < points.length;i++ ){
-				usedPoints.add(points[i]);
+			c.setMid(t.getMid());
+			c.setR(t.getR());
+			usedpointfs.clear();
+			for (int i = 0; i < pointfs.length; i++) {
+				usedpointfs.add(pointfs[i]);
 			}
 			return true;
 		}
-		if (points.length == 4){
-			Triangle t1 = new Triangle(points[0], points[1], points[2]);
-			Triangle t2 = new Triangle(points[3], points[1], points[2]);
-			Triangle t3 = new Triangle(points[0], points[3], points[2]);
-			Triangle t4 = new Triangle(points[0], points[1], points[3]);
-			Triangle t5 = t1.getR()<t2.getR()?t1:t2;
-			Triangle t6 = t3.getR()<t4.getR()?t3:t4;
-			Triangle t7 = t5.getR()<t6.getR()?t5:t6;
+		if (pointfs.length == 4) {
+			Triangle t1 = new Triangle(pointfs[0], pointfs[1], pointfs[2]);
+			Triangle t2 = new Triangle(pointfs[3], pointfs[1], pointfs[2]);
+			Triangle t3 = new Triangle(pointfs[0], pointfs[3], pointfs[2]);
+			Triangle t4 = new Triangle(pointfs[0], pointfs[1], pointfs[3]);
+			Triangle t7 = null;
+			if (t1.getR() >= Pointf.distance(t1.getMid(), pointfs[3])) {
+				sorting.add(t1);
+			}
+			if (t2.getR() >= Pointf.distance(t2.getMid(), pointfs[0])) {
+				sorting.add(t2);
+			}
+			if (t3.getR() >= Pointf.distance(t3.getMid(), pointfs[1])) {
+				sorting.add(t3);
+			}
+			if (t4.getR() >= Pointf.distance(t4.getMid(), pointfs[2])) {
+				sorting.add(t4);
+			}
+			float min = Float.POSITIVE_INFINITY;
+			for (int i = 0; i < sorting.size(); i++) {
+				if (sorting.get(i).getR() <= min) {
+					min = sorting.get(i).getR();
+					t7 = sorting.get(i);
+				}
+			}
 			if (!t7.isTri()) {
 				return false;
 			}
-			c.mid = t7.getMid();
-			c.R = t7.getR();
-			usedPoints.clear();
-			usedPoints.add(t7.getA());
-			usedPoints.add(t7.getB());
-			usedPoints.add(t7.getC());
+			c.setMid(t7.getMid());
+			c.setR(t7.getR());
+			usedpointfs.clear();
+			usedpointfs.add(t7.getA());
+			usedpointfs.add(t7.getB());
+			usedpointfs.add(t7.getC());
+			return true;
 		}
 		return false;
 	}
-	class Circle{
-		@SuppressWarnings({"unused"})
+
+	public class Circle {
 		private Pointf mid;
-		@SuppressWarnings("unused")
 		private float R;
-		public Circle(Pointf mid,float R){
+
+		public Circle() {
+			this.setMid(new Pointf(0, 0));
+			this.setR(0);
+		}
+
+		public Circle(Pointf mid, float R) {
+			this.setMid(mid);
+			this.setR(R);
+		}
+
+		public Pointf getMid() {
+			return mid;
+		}
+
+		public void setMid(Pointf mid) {
 			this.mid = mid;
-			this.R = R;
+		}
+
+		public float getR() {
+			return R;
+		}
+
+		public void setR(float r) {
+			R = r;
 		}
 	}
 }
