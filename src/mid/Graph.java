@@ -19,8 +19,13 @@ public class Graph {
 		}
 	}
 
-	public void getMid() {
-
+	public Pointf getMid() {
+		if(nousepointfs.size()<3){
+			return null;
+		}else if(nousepointfs.size() == 3){
+			
+		}
+		return null;
 	}
 
 	public ArrayList<Pointf> getNousepointfs() {
