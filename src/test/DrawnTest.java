@@ -131,6 +131,8 @@ class ArcsPanel extends JPanel {
 	// - c.getR()), (int) c.getR() * 2,
 	// (int) c.getR() * 2);
 	// }
+	
+	// Mid_Test
 	protected void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
